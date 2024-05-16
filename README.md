@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# WSL Spoiler-Free App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+Welcome to the WSL Spoiler-Free App! This project aims to provide users with a platform to follow the Women's Super League (WSL) without encountering spoilers for specific teams or matches. Users will be able to hide spoilers before entering the app, ensuring they can enjoy news and match videos without any unwanted information.
 
-In the project directory, you can run:
+## Current Status
 
-### `npm start`
+This project is currently in the early stages of development. So far, the React skeleton has been set up, and two scripts have been created:
+1. **News Script**: Fetches the latest news from The Guardian's Women's Football page.
+2. **Videos Script**: Retrieves videos from the Everything Women's Football YouTube channel.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Future Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The following features are planned for future development:
+- **Spoiler Hiding**: Allow users to select specific teams or matches to hide spoilers for.
+- **News Viewing**: Browse and read the latest news articles related to WSL.
+- **Full Match Videos**: Watch full match videos from the Everything Women's Football YouTube channel.
+- **User Interface**: Develop a user-friendly interface with React components for seamless navigation and interaction.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To get started with the project, clone the repository and install the necessary dependencies.
 
-### `npm run build`
+```bash
+git clone https://github.com/yourusername/wsl-spoiler-free-app.git
+cd wsl-spoiler-free-app
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the App
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run the app locally, use the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+This will start the development server, and you can view the app in your browser at `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Contributing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Contributions are welcome! If you have suggestions for improvements or would like to help build the project, please feel free to fork the repository and submit a pull request.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for your interest in the WSL Spoiler-Free App. Stay tuned for updates as we continue to build and improve the project!
