@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.x  # Specify the Python version
+          python-version: '3.x'  # Specify the Python version
 
       - name: Install dependencies
         run: |
@@ -31,8 +31,9 @@ jobs:
       - name: Install ChromeDriver
         run: |
           sudo apt-get install -y unzip
-          CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          wget -N http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv -f chromedriver /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
@@ -41,7 +42,7 @@ jobs:
         run: python scripts/getVideos.py
 
       - name: Run article scraper
-        run: python scripts/getNewsArticles.py
+        run: python scripts/getArticles.py
 
       - name: Commit and push changes
         run: |
