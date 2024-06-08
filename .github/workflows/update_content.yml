@@ -38,10 +38,10 @@ jobs:
           sudo chmod 0755 /usr/local/bin/chromedriver
 
       - name: Run video scraper
-        run: python scripts/video_scraper.py
+        run: python scripts/getVideos.py
 
       - name: Run article scraper
-        run: python scripts/article_scraper.py
+        run: python scripts/getNewsArticles.py
 
       - name: Commit and push changes
         run: |
