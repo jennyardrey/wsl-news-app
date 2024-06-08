@@ -12,7 +12,7 @@ def extract_youtube_data(channel_url):
     # Set up Chrome WebDriver
     options = Options()
     options.headless = True  # Run Chrome in headless mode (without opening the browser window)
-    service = Service('/Users/jenniferardrey/Downloads/chromedriver')  # Specify the path to your Chrome WebDriver
+    service = Service('/usr/local/bin/chromedriver')  # Specify the path to your Chrome WebDriver
     driver = webdriver.Chrome(service=service, options=options)
     
     # Navigate to the YouTube channel page
