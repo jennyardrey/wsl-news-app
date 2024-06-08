@@ -52,7 +52,9 @@ def extract_youtube_data(channel_url):
                 title = title_element.text.strip()
                 url_element = element.find_element(By.ID, 'video-title-link')
                 url = url_element.get_attribute('href')
-                video_data.append({"title": title, "url": url})
+                videoIdValue = url.split("v=", 1)[1]
+                videoId = "https://www.youtube.com/embed/" + videoIdValue
+                video_data.append({"title": title, "url": url, "videoId": videoId})
             break
         except StaleElementReferenceException:
             print("Encountered a stale element reference exception, retrying...")

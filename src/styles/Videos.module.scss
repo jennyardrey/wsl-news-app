@@ -1,0 +1,25 @@
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tabs button {
+    padding: 10px 20px;
+    background-color: #D3D3D3; // Goal Post Gray
+    border: 1px solid #388E3C; // Dark Pitch Green
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tabs button:hover {
+    background-color: #81C784; // Light Pitch Green
+    color: #388E3C; // Dark Pitch Green
+  }
+  
+  .tabs .activeTab {
+    background-color: #4CAF50; // Pitch Green
+    color: #FFFFFF; // White
+    border-bottom: 2px solid #388E3C; // Dark Pitch Green
+  }
+  
