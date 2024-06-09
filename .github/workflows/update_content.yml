@@ -26,13 +26,13 @@ jobs:
 
       - name: Install ChromeDriver
         run: |
-          # Replace the URL with the appropriate version of ChromeDriver
-          wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
+          wget -N https://chromedriver.storage.googleapis.com/125.0.6422.141/chromedriver_linux64.zip -P ~/
           unzip ~/chromedriver_linux64.zip -d ~/
           rm ~/chromedriver_linux64.zip
           sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
           sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod 0755 /usr/local/bin/chromedriver
+
 
       - name: Set up Python
         uses: actions/setup-python@v2
