@@ -9,38 +9,37 @@ jobs:
   update-content:
     runs-on: ubuntu-latest
 
-    env:
-      CHROMEWEBDRIVER: /usr/local/share/chrome_driver
-      CHROME_BIN: /usr/bin/google-chrome
+    container:
+      image: python:3.9-slim
+      options: --privileged  # Add this option to grant extended privileges to the container
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2 google-chrome-stable
+
+      - name: Install Chrome Driver
+        run: |
+          wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
+          unzip ~/chromedriver_linux64.zip -d ~/
+          rm ~/chromedriver_linux64.zip
+          mv -f ~/chromedriver /usr/local/bin/chromedriver
+          chown root:root /usr/local/bin/chromedriver
+          chmod 0755 /usr/local/bin/chromedriver
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'  # Specify the Python version
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # Install dependencies from requirements.txt
-
-      - name: Install Chrome Driver
-        run: |
-          apt-get --allow-releaseinfo-change update
-          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2
-          sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
-          sudo echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get -y update
-          sudo apt-get -y install google-chrome-stable
-          wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
-          unzip ~/chromedriver_linux64.zip -d ~/
-          rm ~/chromedriver_linux64.zip
-          sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-          sudo chown root:root /usr/local/bin/chromedriver
-          sudo chmod 0755 /usr/local/bin/chromedriver
 
       - name: Run video scraper
         run: python scripts/getVideos.py
