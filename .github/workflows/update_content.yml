@@ -9,27 +9,29 @@ jobs:
   update-content:
     runs-on: ubuntu-latest
 
-    container:
-      image: python:3.9-slim
-      options: --privileged  # Add this option to grant extended privileges to the container
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Install dependencies
         run: |
-          apt-get update
-          apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2 google-chrome-stable
+          sudo apt-get update
+          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2
+
+      - name: Install Google Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get install -f
 
       - name: Install Chrome Driver
         run: |
           wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
           unzip ~/chromedriver_linux64.zip -d ~/
           rm ~/chromedriver_linux64.zip
-          mv -f ~/chromedriver /usr/local/bin/chromedriver
-          chown root:root /usr/local/bin/chromedriver
-          chmod 0755 /usr/local/bin/chromedriver
+          sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+          sudo chown root:root /usr/local/bin/chromedriver
+          sudo chmod 0755 /usr/local/bin/chromedriver
 
       - name: Set up Python
         uses: actions/setup-python@v2
