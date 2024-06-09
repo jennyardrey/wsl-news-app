@@ -27,21 +27,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-      - name: Install Google Chrome
+         - name: Install Chrome Driver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Install ChromeDriver
-        run: |
-          sudo apt-get install -y unzip
-          echo "$CHROMEWEBDRIVER/chromedriver --version"
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          wget -N "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-          unzip chromedriver_linux64.zip
-          sudo mv -f chromedriver "$CHROMEWEBDRIVER/chromedriver"
-          sudo chmod 0755 "$CHROMEWEBDRIVER/chromedriver"
+            sudo apt-get --allow-releaseinfo-change update
+            sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2
+            sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
+            sudo echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+            sudo apt-get -y update
+            sudo apt-get -y install google-chrome-stable
+            wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
+            unzip ~/chromedriver_linux64.zip -d ~/
+            rm ~/chromedriver_linux64.zip
+            sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+            sudo chown root:root /usr/local/bin/chromedriver
+            sudo chmod 0755 /usr/local/bin/chromedriver
 
       - name: Run video scraper
         run: python scripts/getVideos.py
