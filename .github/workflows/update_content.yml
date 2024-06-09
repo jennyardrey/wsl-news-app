@@ -24,8 +24,9 @@ jobs:
           sudo dpkg -i google-chrome-stable_current_amd64.deb
           sudo apt-get install -f
 
-      - name: Install Chrome Driver
+      - name: Install ChromeDriver
         run: |
+          # Replace the URL with the appropriate version of ChromeDriver
           wget -N https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip -P ~/
           unzip ~/chromedriver_linux64.zip -d ~/
           rm ~/chromedriver_linux64.zip
