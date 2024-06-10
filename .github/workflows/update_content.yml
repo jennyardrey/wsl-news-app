@@ -47,7 +47,7 @@ jobs:
         run: python scripts/getVideos.py
 
       - name: Run article scraper
-        run: python scripts/getArticles.py
+        run: python scripts/getNewsArticles.py
 
       - name: Commit and push changes
         run: |
