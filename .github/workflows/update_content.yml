@@ -16,15 +16,15 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2
+          sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4 gnupg2 wget
 
-      - name: Install Google Chrome
+      - name: Install Google Chrome 114
         run: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          wget https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.106-1_amd64.deb
+          sudo dpkg -i google-chrome-stable_114.0.5735.106-1_amd64.deb
           sudo apt-get install -f
 
-      - name: Install ChromeDriver
+      - name: Install ChromeDriver 114
         run: |
           wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip -P ~/
           unzip ~/chromedriver_linux64.zip -d ~/
