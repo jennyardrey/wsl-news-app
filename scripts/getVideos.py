@@ -63,7 +63,7 @@ def extract_youtube_data(channel_url):
             break
     
     # Save video data to JSON
-    with open('youtube_video_data.json', 'w') as f:
+    with open('scripts/youtube_video_data.json', 'w') as f:
         json.dump(video_data, f, indent=4)
     
     # Close the WebDriver

@@ -2,69 +2,60 @@ import logging
 from bs4 import BeautifulSoup
 import json
 import os
-import requests
-from requests_toolbelt import sessions
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry # type: ignore
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-def requests_retry_session(
-    retries=3,
-    backoff_factor=0.3,
-    status_forcelist=(500, 502, 504),
-    session=None,
-):
-    session = session or sessions.BaseUrlSession()
+def init_webdriver():
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    retry = Retry(
-        total=retries,
-        read=retries,
-        connect=retries,
-        backoff_factor=backoff_factor,
-        status_forcelist=status_forcelist,
-    )
+    service = Service('/usr/local/bin/chromedriver')  # Update path if necessary
+    driver = webdriver.Chrome(service=service, options=options)
+    return driver
 
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('http://', adapter)
-    session.mount('https://', adapter)
-    return session
+def handle_cookie_banner(driver):
+    try:
+        # Adjust the selector based on the actual cookie banner structure of the website
+        accept_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, '.sp_choice_type_13'))
+        )
+        accept_button.click()
+        print("Cookie banner accepted.")
+    except (TimeoutException, NoSuchElementException) as e:
+        print("No cookie banner found or unable to click accept button.")
 
-def scrape_news(url):
-    # Send a GET request to the URL
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-    }    
+def scrape_news(driver, url):
+    driver.get(url)
+    handle_cookie_banner(driver)
     
-    # Use requests_retry_session instead of requests.get
-    response = requests_retry_session().get(url, headers=headers)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    # Parse the HTML content
-    soup = BeautifulSoup(response.content, 'html.parser')
-
-    # Find the relevant elements containing the news articles
     articles = soup.select('.fc-slice__item')
     print(f"articles: {articles}")
 
-    # Create a list to store news objects
     news_list = []
 
     for article in articles:
-        # Extract headline
         headline_element = article.select_one('.fc-item__headline')
         headline = headline_element.text.strip() if headline_element else None
 
-            # Extract link
         link_element = article.select_one('.fc-item__link')
         link = link_element['href'] if link_element else None
 
-        # Extract image (if available)
         image_element = article.select_one('.responsive-img')
         image = image_element['src'] if image_element else None
 
-        # Extract summary
         summary_element = article.select_one('.fc-item__standfirst')
         summary = summary_element.text.strip() if summary_element else None
 
-        # Create a news object
         news_obj = {
             'headline': headline,
             'link': link,
@@ -88,18 +79,22 @@ def save_to_json(news_list, filename):
 
 def main():
     url = 'https://www.theguardian.com/football/womensfootball'
-    filename = 'news_data.json'
+    filename = 'scripts/news_data.json'
 
     print(f"getting url: {url}")
 
+    driver = init_webdriver()
+
     # Scrape news data
-    news_list = scrape_news(url)
+    news_list = scrape_news(driver, url)
 
     print(f"news list: {news_list}")
 
     # Save news data to JSON file
     save_to_json(news_list, filename)
     print(f"The News data saved to {filename}")
+
+    driver.quit()
 
 if __name__ == "__main__":
     main()
