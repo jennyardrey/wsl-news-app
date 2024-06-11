@@ -49,6 +49,14 @@ jobs:
       - name: Run article scraper
         run: python scripts/getNewsArticles.py
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: scrape-artifacts
+          path: |
+            scripts/news_data.json
+            scripts/page_screenshot.png
+
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'

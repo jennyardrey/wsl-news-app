@@ -48,7 +48,16 @@ def scrape_news(driver, url):
     handle_cookie_banner(driver)
     handle_donation_banner(driver)
 
-    
+    # Wait for the page to fully load
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, '.fc-slice__item'))
+    )
+
+    # Take a screenshot for debugging
+    screenshot_path = 'scripts/page_screenshot.png'
+    driver.save_screenshot(screenshot_path)
+    print(f"Screenshot saved to {screenshot_path}")
+
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     articles = soup.select('.fc-slice__item')
@@ -80,7 +89,8 @@ def scrape_news(driver, url):
 
         news_list.append(news_obj)
 
-    return news_list
+    return news_list, screenshot_path
+
 
 def save_to_json(news_list, filename):
     try:
