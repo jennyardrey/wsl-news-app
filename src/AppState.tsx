@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, ReactNode, Dispatch, useEffect, useRef } from 'react';
 import axios from 'axios';
-import newsJson from "../scripts/news_data.json"
-import videosJson from "../scripts/youtube_video_data.json"
+import newsJson from "./content/news_data.json"
+import videosJson from "./content/youtube_video_data.json"
 
 // Define action types
 type ActionType = 

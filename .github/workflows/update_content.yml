@@ -54,8 +54,8 @@ jobs:
         with:
           name: scrape-artifacts
           path: |
-            scripts/news_data.json
-            scripts/page_screenshot.png
+            src/content/news_data.json
+            src/content/page_screenshot.png
 
       - name: Commit and push changes
         run: |

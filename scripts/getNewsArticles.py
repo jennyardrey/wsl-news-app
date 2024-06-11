@@ -92,7 +92,7 @@ def save_to_json(news_list, filename):
 
 def main():
     url = 'https://shekicks.net/category/womensfootballnews/'
-    filename = 'scripts/news_data.json'
+    filename = 'src/content/news_data.json'
 
     print(f"getting url: {url}")
 
