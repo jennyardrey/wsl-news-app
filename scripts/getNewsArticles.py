@@ -24,7 +24,7 @@ def init_webdriver():
 def handle_cookie_banner(driver):
     try:
         # Adjust the selector based on the actual cookie banner structure of the website
-        accept_button = WebDriverWait(driver, 20).until(
+        accept_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, '.sp_choice_type_11'))
         )
         accept_button.click()
@@ -35,7 +35,7 @@ def handle_cookie_banner(driver):
 def handle_donation_banner(driver):
     try:
         # Adjust the selector based on the actual cookie banner structure of the website
-        close_button = WebDriverWait(driver, 20).until(
+        close_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, '.dcr-146samk'))
         )
         close_button.click()
@@ -48,34 +48,25 @@ def scrape_news(driver, url):
     handle_cookie_banner(driver)
     handle_donation_banner(driver)
 
-    # Wait for the page to fully load
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, '.fc-slice__item'))
-    )
-
-    # Take a screenshot for debugging
-    screenshot_path = 'scripts/page_screenshot.png'
-    driver.save_screenshot(screenshot_path)
-    print(f"Screenshot saved to {screenshot_path}")
-
+    
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    articles = soup.select('.fc-slice__item')
+    articles = soup.select('.mh-posts-list-item')
     print(f"articles: {articles}")
 
     news_list = []
 
     for article in articles:
-        headline_element = article.select_one('.fc-item__headline')
+        headline_element = article.select_one('.mh-posts-list-title a')
         headline = headline_element.text.strip() if headline_element else None
 
-        link_element = article.select_one('.fc-item__link')
+        link_element = headline_element
         link = link_element['href'] if link_element else None
 
-        image_element = article.select_one('.responsive-img')
+        image_element = article.select_one('.mh-thumb-icon img')
         image = image_element['src'] if image_element else None
 
-        summary_element = article.select_one('.fc-item__standfirst')
+        summary_element = article.select_one('.mh-excerpt p')
         summary = summary_element.text.strip() if summary_element else None
 
         news_obj = {
@@ -89,8 +80,7 @@ def scrape_news(driver, url):
 
         news_list.append(news_obj)
 
-    return news_list, screenshot_path
-
+    return news_list
 
 def save_to_json(news_list, filename):
     try:
@@ -101,7 +91,7 @@ def save_to_json(news_list, filename):
         print(f"Error occurred while saving news data: {e}")
 
 def main():
-    url = 'https://www.theguardian.com/football/womensfootball'
+    url = 'https://shekicks.net/category/womensfootballnews/'
     filename = 'scripts/news_data.json'
 
     print(f"getting url: {url}")
