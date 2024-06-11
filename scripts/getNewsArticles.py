@@ -24,7 +24,7 @@ def init_webdriver():
 def handle_cookie_banner(driver):
     try:
         # Adjust the selector based on the actual cookie banner structure of the website
-        accept_button = WebDriverWait(driver, 10).until(
+        accept_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, '.sp_choice_type_11'))
         )
         accept_button.click()
@@ -35,7 +35,7 @@ def handle_cookie_banner(driver):
 def handle_donation_banner(driver):
     try:
         # Adjust the selector based on the actual cookie banner structure of the website
-        close_button = WebDriverWait(driver, 10).until(
+        close_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, '.dcr-146samk'))
         )
         close_button.click()
