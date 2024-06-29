@@ -60,6 +60,10 @@ def scrape_news(driver, url):
         headline_element = article.select_one('.mh-posts-list-title a')
         headline = headline_element.text.strip() if headline_element else None
 
+        meta_element = article.select_one('.mh-meta')
+        date_element = meta_element.select_one('.entry-meta-date')
+        date = date_element.select_one('a').text.strip() if date_element else None
+
         link_element = headline_element
         link = link_element['href'] if link_element else None
 
@@ -73,7 +77,8 @@ def scrape_news(driver, url):
             'headline': headline,
             'link': link,
             'image': image,
-            'summary': summary
+            'summary': summary,
+            'date': date
         }
 
         print(f"News Object {news_obj}")
