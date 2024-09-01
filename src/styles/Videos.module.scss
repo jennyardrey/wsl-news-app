@@ -5,7 +5,6 @@
   }
   
   .tabs button {
-    padding: 10px 20px;
     background-color: #D3D3D3; // Goal Post Gray
     border: 1px solid #388E3C; // Dark Pitch Green
     cursor: pointer;
@@ -22,4 +21,64 @@
     color: #FFFFFF; // White
     border-bottom: 2px solid #388E3C; // Dark Pitch Green
   }
-  
+
+  .videoContainer {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+    font-family: 'Arial, sans-serif';
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    margin: 0 10px;
+    
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    background-color: #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #bbb;
+}
+
+.activeTab {
+    background-color: #333;
+    color: white;
+}
+
+.videoWrapper {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.videoIframe {
+    display: block;
+    width: calc(100% - 20px); /* Ensure the iframe fits within the padding */
+    height: 315px;
+    margin: 0 auto;
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+  button {
+    padding: 10px 20px;
+  }
+}

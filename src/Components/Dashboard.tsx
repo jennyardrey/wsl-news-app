@@ -3,11 +3,11 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useAppState } from '../AppState.tsx';
-import Table from './Table.tsx';
-import News from './News.tsx';
-import Video from './Video.tsx';
+import Table from '../components/Table.tsx';
+import News from '../components/News.tsx';
+import Video from '../components/Video.tsx';
 
-function Home() {
+function Dashboard() {
     const { state, dispatch } = useAppState();
 
     // Conditional rendering to handle different states
@@ -30,11 +30,9 @@ function Home() {
                    <Table />
                 </TabPanel>
                 <TabPanel>
-                    <h2>News Section</h2>
                     <News />
                 </TabPanel>
                 <TabPanel>
-                    <h2>Video Section</h2>
                     <Video />
                 </TabPanel>
             </Tabs>
@@ -42,4 +40,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Dashboard;

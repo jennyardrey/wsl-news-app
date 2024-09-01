@@ -55,7 +55,7 @@ function Video() {
   }
 
   return (
-    <div>
+    <div className={styles.videoContainer}>
       <h2>Football Videos</h2>
 
       <div className={styles.tabs}>
@@ -81,10 +81,11 @@ function Video() {
 
       <div>
         {visibleVideos.map((el, i) => (
-          <div key={i}>
+          <div key={i} className={styles.videoWrapper}>
             <div>{el.title}</div>
             <p>
               <iframe
+                className={styles.videoIframe}
                 width="560"
                 height="315"
                 src={el.videoId}

@@ -6,7 +6,8 @@ import videosJson from "./content/youtube_video_data.json"
 // Define action types
 type ActionType = 
   | { type: 'SET_TAB_INDEX'; payload: number }
-  | { type: 'SET_DATA'; payload: any }
+  | { type: 'SET_FIXTURES_DATA'; payload: any }
+  | { type: 'SET_STANDINGS_DATA'; payload: any }
   | { type: 'SET_NEWS'; payload: any }
   | { type: 'SET_VIDEOS'; payload: any }
   | { type: 'SET_LOADING'; payload: boolean }
@@ -16,7 +17,8 @@ type ActionType =
 // Define the initial state and its type
 interface State {
   tabIndex: number;
-  data: any;
+  fixtures: any;
+  standings: any;
   loading: boolean;
   error: string;
   news: any;
@@ -29,7 +31,8 @@ interface State {
 
 const initialState: State = {
   tabIndex: 0,
-  data: null,
+  fixtures: null,
+  standings: null,
   loading: false,
   error: '',
   news: null,
@@ -54,8 +57,10 @@ const appReducer = (state: State, action: ActionType): State => {
   switch (action.type) {
     case 'SET_TAB_INDEX':
       return { ...state, tabIndex: action.payload };
-    case 'SET_DATA':
-      return { ...state, data: action.payload };
+    case 'SET_FIXTURES_DATA':
+      return { ...state, fixtures: action.payload };
+      case 'SET_STANDINGS_DATA':
+        return { ...state, standings: action.payload };
     case 'SET_LOADING':
       return { ...state, loading: action.payload };
     case 'SET_ERROR':
@@ -88,7 +93,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
     const fetchData = async () => {
       dispatch({ type: 'SET_LOADING', payload: true });
       try {
-        let storedData = localStorage.getItem('apiData');
+        let storedData = sessionStorage.getItem('apiData');
         console.log('storedData', Boolean(storedData), 'isDataFetched', isDataFetched.current);
         
         if (storedData) {
@@ -99,19 +104,42 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
         } else {
           // Otherwise, fetch data from the API
           console.log('Deffo fetching');
-          const response = await axios.request({
+          const todaysDate = new Date();
+          const sevenDaysAgo = new Date();
+          sevenDaysAgo.setDate(todaysDate.getDate() - 7);
+          const formattedToday = todaysDate.toISOString().split('T')[0];
+          const formattedSevenDaysAgo = sevenDaysAgo.toISOString().split('T')[0];
+          console.log(formattedToday,formattedSevenDaysAgo )
+          const responseStandings = await axios.request({
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/standings',
-            params: { season: '2023', league: '44' },
+            params: { season: '2024', league: '44' },
             headers: {
               'X-RapidAPI-Key': '39b82871damsh553380b45309c17p14d219jsn01f1cf3822d6',
               'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
             },
           });
-          console.log('API Response:', response); // Log API response
-          dispatch({ type: 'SET_DATA', payload: response.data }); // Use response.data
-          localStorage.setItem('apiData', JSON.stringify(response.data)); // Store data in local storage
+          console.log('API Response1:', responseStandings); // Log API response
+          dispatch({ type: 'SET_STANDINGS_DATA', payload: {...responseStandings.data, }})
+          const responseFixtures = await axios.request({
+            method: 'GET', 
+            url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
+            params: { season: '2024', league: '44', from: `${formattedToday}`, to:`${formattedSevenDaysAgo}` },
+            headers: {
+              'X-RapidAPI-Key': '39b82871damsh553380b45309c17p14d219jsn01f1cf3822d6',
+              'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
+            },
+          })
+          console.log('API Response2:', responseFixtures); // Log API response
+          const combinedData = {
+            standings: responseStandings.data,
+            fixtures: responseFixtures.data
+          }
+          dispatch({ type: 'SET_FIXTURES_DATA', payload: {...responseFixtures.data} });
+          sessionStorage.setItem('apiData', JSON.stringify({combinedData})); // Store data in local storage
+
         }
+
         isDataFetched.current = true;
 
         if (newsJson) {

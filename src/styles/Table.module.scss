@@ -1,0 +1,78 @@
+.tableContainer {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #666;
+}
+
+.leagueLogo {
+    display: block;
+    margin: 10px auto;
+    max-width: 100px;
+}
+
+.leagueName {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tableRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tableHeader {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.tableCell {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .tableRow {
+        flex-direction: column;
+        border: 1px black solid;
+        margin-bottom: 2px;
+    }
+
+    .tableHeader {
+        display: none;
+    }
+
+    .tableCell {
+        display: block;
+        border: none;
+        padding: 10px;
+        text-align: left;
+        position: relative;
+    }
+
+    .tableCell::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+}

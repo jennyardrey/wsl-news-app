@@ -1,7 +1,7 @@
 import './App.css';
 import React  from 'react';
 import { AppStateProvider } from './AppState.tsx';
-import Home from "./Components/Home.tsx"
+import Home from "./pages/Home.tsx"
 
 
     function App() {
