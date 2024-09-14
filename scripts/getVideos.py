@@ -72,7 +72,7 @@ def extract_youtube_data(channel_url):
     return video_data
 
 # URL of the YouTube channel page
-channel_url = "https://www.youtube.com/@EverythingWomensFootball/videos"
+channel_url = "https://www.youtube.com/@WFullMatch/videos"
 
 extracted_data = extract_youtube_data(channel_url)
 print(extracted_data)

@@ -23,6 +23,9 @@ p {
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    background-color: white;
+    padding: 1rem;
+    opacity: 90%;
 }
 
 .news_article:hover {
