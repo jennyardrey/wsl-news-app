@@ -3,9 +3,9 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useAppState } from '../AppState.tsx';
-import Table from '../components/Table.tsx';
-import News from '../components/News.tsx';
-import Video from '../components/Video.tsx';
+import Table from './Table.tsx';
+import News from './News.tsx';
+import Video from './Video.tsx';
 
 function Dashboard() {
     const { state, dispatch } = useAppState();
