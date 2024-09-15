@@ -62,17 +62,32 @@ def extract_youtube_data(channel_url):
             print("An error occurred:", e)
             break
     
-    # Save video data to JSON
-    with open('src/content/youtube_video_data.json', 'w') as f:
-        json.dump(video_data, f, indent=4)
-    
     # Close the WebDriver
     driver.quit()
 
     return video_data
 
-# URL of the YouTube channel page
-channel_url = "https://www.youtube.com/@WFullMatch/videos"
+def fetch_videos_from_channels(channel_urls):
+    all_video_data = []
+    
+    # Loop through each channel URL and fetch video data
+    for url in channel_urls:
+        print(f"Fetching videos from {url}...")
+        channel_video_data = extract_youtube_data(url)
+        all_video_data.extend(channel_video_data)  # Combine the data from each channel
+    
+    # Save all video data to a single JSON file
+    with open('src/content/youtube_video_data.json', 'w') as f:
+        json.dump(all_video_data, f, indent=4)
+    
+    return all_video_data
 
-extracted_data = extract_youtube_data(channel_url)
-print(extracted_data)
+# List of YouTube channel URLs
+channel_urls = [
+    "https://www.youtube.com/@FullMatch/videos",
+    "https://www.youtube.com/@EverythingWomensFootball/videos"
+]
+
+# Fetch videos from all channels and compile into one JSON file
+all_extracted_data = fetch_videos_from_channels(channel_urls)
+print(all_extracted_data)
