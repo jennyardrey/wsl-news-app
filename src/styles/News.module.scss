@@ -2,17 +2,18 @@
     width: 90%;
     margin: 0 auto;
     max-width: 1200px;
+    background-color: #f5f5f5;
 }
 
 h2 {
     text-align: center;
     margin-top: 20px;
-    color: #333;
+    color: #333333;
 }
 
 p {
     text-align: center;
-    color: #666;
+    color: #666666;
 }
 
 .news_article {
@@ -20,10 +21,9 @@ p {
     align-items: center;
     margin: 20px 0;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background-color: #ffffff;
     overflow: hidden;
     transition: transform 0.3s ease;
-    background-color: white;
     padding: 1rem;
     opacity: 90%;
 }
@@ -58,17 +58,17 @@ p {
 .news_headline {
     font-size: 1.2em;
     margin: 0;
-    color: #333;
+    color: #3498db;
 }
 
 .news_date {
     font-size: 0.9em;
-    color: #888;
+    color: #888888;
 }
 
 .news_summary {
     font-size: 1em;
-    color: #555;
+    color: #555555;
     margin-top: 10px;
 }
 

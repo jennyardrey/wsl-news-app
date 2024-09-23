@@ -6,7 +6,6 @@ import styles from '../styles/Videos.module.scss';
 const VideoCategories = {
   FULL_MATCHES: 'Full Matches',
   HIGHLIGHTS: 'Highlights',
-  OTHERS: 'Others',
 };
 
 function Video() {
@@ -41,8 +40,6 @@ function Video() {
         return videos.fullMatch || [];
       case VideoCategories.HIGHLIGHTS:
         return videos.highlights || [];
-      case VideoCategories.OTHERS:
-        return videos.others || [];
       default:
         return [];
     }
@@ -69,32 +66,24 @@ function Video() {
           onClick={() => setActiveCategory(VideoCategories.HIGHLIGHTS)}
           className={activeCategory === VideoCategories.HIGHLIGHTS ? styles.activeTab : ''}
         >
-          Highlights
-        </button>
-        <button
-          onClick={() => setActiveCategory(VideoCategories.OTHERS)}
-          className={activeCategory === VideoCategories.OTHERS ? styles.activeTab : ''}
-        >
-          Others
+          Highlights and Extras
         </button>
       </div>
 
-      <div>
+      <div className={styles.videoGrid}>
         {visibleVideos.map((el, i) => (
           <div key={i} className={styles.videoWrapper}>
-            <div>{el.title}</div>
-            <p>
+            <div className={styles.videoFrame}>
               <iframe
                 className={styles.videoIframe}
-                width="560"
-                height="315"
                 src={el.videoId}
                 title={el.title}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               ></iframe>
-            </p>
+            </div>
+            <div className={styles.videoTitle}>{el.title}</div>
           </div>
         ))}
       </div>
@@ -102,7 +91,7 @@ function Video() {
       {/* Button to load more videos */}
       {state.categorisedVideos &&
         visibleVideos.length < getVideosByCategory(activeCategory, state.categorisedVideos).length && (
-          <button onClick={loadMoreVideos}>Load More Videos</button>
+          <button className={styles.loadMoreButton} onClick={loadMoreVideos}>Load More Videos</button>
         )}
     </div>
   );

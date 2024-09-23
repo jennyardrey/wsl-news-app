@@ -96,7 +96,7 @@ def save_to_json(news_list, filename):
         print(f"Error occurred while saving news data: {e}")
 
 def main():
-    url = 'https://shekicks.net/category/womensfootballnews/'
+    url = 'https://shekicks.net/category/womensfootballnews/league-news/wsl-league-news/'
     filename = 'src/content/news_data.json'
 
     print(f"getting url: {url}")

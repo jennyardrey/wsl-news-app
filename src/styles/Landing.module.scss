@@ -1,5 +1,5 @@
 .title {
-  color: #235789;
+  color: #3498db;
   text-align: center;
   width: 100%;
 }
@@ -17,9 +17,8 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
   }
   
   .preferencesForm h2 {
@@ -44,13 +43,12 @@
     margin-top: 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #007bff;
+    background-color: #3498db;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
   .preferencesForm button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
   }
-  

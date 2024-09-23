@@ -1,0 +1,67 @@
+.dashboard {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: #3498db;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navList {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navItem {
+    flex: 1;
+    text-align: center;
+
+    button {
+        width: 100%;
+        padding: 15px 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    &.active button {
+        background-color: #2980b9;
+    }
+}
+
+.content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .navList {
+        flex-direction: column;
+    }
+
+    .navItem {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}

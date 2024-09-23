@@ -31,12 +31,17 @@ function Home() {
     }
 
     return (
-        <div>
+       /*  <div>
             {!preferencesUpdated ? (
                 <Landing onPreferencesSaved={handlePreferencesSaved} />  // Pass the callback to Landing component
             ) : (
                 <Dashboard />
             )}
+        </div> */
+        <div>
+            
+                <Dashboard />
+         
         </div>
     );
 }
