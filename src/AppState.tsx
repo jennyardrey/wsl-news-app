@@ -70,9 +70,12 @@ const appReducer = (state: State, action: ActionType): State => {
     case 'SET_VIDEOS':
       return { ...state, videos: action.payload };
     case 'CATEGORISE_VIDEOS':
-      const fullMatch = action.payload.filter(video => video.title.includes('Full Match'));
-      const highlights = action.payload.filter(video => video.title.includes('Highlights'));
-      const others = action.payload.filter(video => !video.title.includes('Full Match') && !video.title.includes('Highlights'));
+      console.log('videos:', action.payload)
+      const fullMatch = action.payload.filter(video => video.title.toLowerCase().includes('Full Match'));
+      const highlights = action.payload.filter(video => video.title.toLowerCase().includes('Highlights'));
+      const others = action.payload.filter(video => !video.title.toLowerCase().includes('Full Match') && !video.title.toLowerCase().includes('Highlights'));
+
+      console.log('matches: ',fullMatch, highlights, others)
       return { ...state, categorisedVideos: { fullMatch, highlights, others } };
     default:
       return state;

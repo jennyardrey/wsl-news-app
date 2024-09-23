@@ -84,8 +84,8 @@ def fetch_videos_from_channels(channel_urls):
 
 # List of YouTube channel URLs
 channel_urls = [
-    "https://www.youtube.com/@FullMatch/videos",
-    "https://www.youtube.com/@EverythingWomensFootball/videos"
+    "https://www.youtube.com/@BarclaysWSL/streams",
+    "https://www.youtube.com/@BarclaysWSL/videos",
 ]
 
 # Fetch videos from all channels and compile into one JSON file
