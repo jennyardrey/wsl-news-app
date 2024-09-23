@@ -1,9 +1,9 @@
 import React from "react";
-import { useAppState } from "../AppState.tsx";
+import { useAppState } from "../AppState";
 import styles from  '../styles/News.module.scss';
 
 function News() {
-    const { state, dispatch } = useAppState();
+    const { state } = useAppState();
 
     if (!state.news) {
         return <div>Loading...</div>; // Render loading indicator while data is being fetched
@@ -17,7 +17,7 @@ function News() {
                
                 {state.news.map((el, i) => (
                     <div className={styles.news_article} key={i} >
-                        <a className={styles.news_link} href={el.link}>
+                        <a className={styles.news_link} href={el.link} target="_blank" rel="noreferrer">
                             <img src={el.image} alt={el.headline} className={styles.news_image} />
                             <div className={styles.news_content}>
                                 <h3 className={styles.news_headline}>{el.headline}</h3>

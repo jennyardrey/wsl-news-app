@@ -1,14 +1,17 @@
 .tableContainer {
     width: 90%;
-    margin: 0 auto;
-    max-width: 1200px;
-    background-color: #f5f5f5;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-h2, .leagueName {
-    text-align: center;
-    margin-top: 20px;
-    color: #333333;
+h2 {
+    margin: 0;
+    color: #343a40;
+    font-size: 1.5rem;
 }
 
 p {
@@ -17,9 +20,9 @@ p {
 }
 
 .leagueLogo {
-    display: block;
-    margin: 10px auto;
-    max-width: 100px;
+    width: 60px;
+    height: auto;
+    margin-right: 15px;
 }
 
 .leagueName {
@@ -31,52 +34,148 @@ p {
 
 .table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .tableRow {
     display: flex;
-    justify-content: space-between;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #f8f9fa;
+    }
 }
 
 .tableHeader {
-    background-color: #3498db;
-    color: #ffffff;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .tableCell {
     flex: 1;
-    padding: 12px;
-    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
     text-align: center;
-    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-@media (max-width: 768px) {
-    .tableRow {
-        flex-direction: column;
-        border: 1px black solid;
-        margin-bottom: 2px;
+.rankCell {
+    flex: 0 0 60px;
+}
+
+.teamCell {
+    flex: 2;
+    justify-content: flex-start;
+}
+
+.teamLogo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.mobileTeamLogo {
+    display: none;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.error {
+    color: #dc3545;
+}
+
+// Desktop-specific styles
+@media (min-width: 769px) {
+    .mobileColumns {
+        display: flex;
+        width: 100%;
     }
 
-    .tableHeader {
+    .mobileColumn {
+        display: flex;
+        width: 100%;
+    }
+
+    .logoColumn {
+        display: none; // Hide the separate logo column on desktop
+    }
+
+    .teamCell {
+        display: flex;
+        align-items: center;
+    }
+
+    .teamLogo {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .mobileTeamLogo {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
+// Mobile-specific styles (unchanged)
+@media (max-width: 768px) {
+    .tableContainer {
+        width: 95%;
+    }
+
+    .tableRow {
+        padding: 10px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .tableHeaderRow {
         display: none;
     }
 
-    .tableCell {
-        display: block;
-        border: none;
-        padding: 10px;
-        text-align: left;
-        position: relative;
-       
+    .mobileColumns {
+        display: flex;
+        width: 100%;
     }
 
-    .tableCell::before {
-        content: attr(data-label);
-        font-weight: bold;
-        margin-right: 10px;
+    .mobileColumn {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logoColumn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tableCell {
+        padding: 5px 10px;
+        text-align: left;
+
+        &::before {
+            content: attr(data-label);
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 70px;
+            display: inline-block;
+        }
+    }
+
+    .teamLogo {
+        width: 50px;
+        height: 50px;
     }
 }

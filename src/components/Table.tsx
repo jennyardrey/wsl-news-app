@@ -1,14 +1,15 @@
 import React from "react";
 import { useAppState } from "../AppState.tsx";
 import styles from '../styles/Table.module.scss';
+import clsx from 'clsx';
 
 function Table() {
     const { state, dispatch } = useAppState();
-    console.log('state: ', state)
+    
     if (!state.standings) {
-        return <div>Loading...</div>; // Render loading indicator while data is being fetched
+        return <div className={styles.loading}>Loading...</div>;
     } else if (state.error) {
-        return <div>Error: {state.error}</div>; // Render error message if there's an error
+        return <div className={styles.error}>Error: {state.error}</div>;
     }
 
     const getRankWithSuffix = (rank) => {
@@ -23,27 +24,37 @@ function Table() {
         }
     };
 
-    console.log('state: ', state)
-
     return ( 
         <div className={styles.tableContainer}>
-            <h2>League Table</h2>
-            <p>The table as it stands:</p>
-            <img src={state.standings.response[0].league.logo} alt='logo' className={styles.leagueLogo} />
-            <div className={styles.leagueName}>{state.standings.response[0].league.name}</div>
+            <div className={styles.tableHeader}>
+                <img src={state.standings.response[0].league.logo} alt='logo' className={styles.leagueLogo} />
+                <h2>{state.standings.response[0].league.name}</h2>
+            </div>
             <div className={styles.table}>
-                <div className={`${styles.tableRow} ${styles.tableHeader}`}>
+                <div className={`${styles.tableRow} ${styles.tableHeaderRow}`}>
                     <div className={styles.tableCell}>Rank</div>
-                    <div className={styles.tableCell}>Team</div>
+                    <div className={`${styles.tableCell} ${styles.teamCell}`}>Team</div>
                     <div className={styles.tableCell}>Points</div>
-                    <div className={styles.tableCell}>Goal Difference</div>
+                    <div className={styles.tableCell}>GD</div>
                 </div>
                 {state.standings.response[0].league.standings[0].map(el => (
                     <div key={el.rank} className={styles.tableRow}>
-                        <div className={styles.tableCell}>{getRankWithSuffix(el.rank)}</div>
-                        <div className={styles.tableCell}>{el.team.name}</div>
-                        <div className={styles.tableCell}>{el.points}</div>
-                        <div className={styles.tableCell}>{el.goalsDiff}</div>
+                        <div className={styles.mobileColumns}>
+                            <div className={styles.mobileColumn}>
+                                <div className={`${styles.tableCell} ${styles.rankCell}`} data-label="Rank">
+                                    {getRankWithSuffix(el.rank)}
+                                </div>
+                                <div className={`${styles.tableCell} ${styles.teamCell}`} data-label="Team">
+                                    <img src={el.team.logo} alt={el.team.name} className={clsx(styles.teamLogo, styles.mobileTeamLogo)} />
+                                    {el.team.name}
+                                </div>
+                                <div className={styles.tableCell} data-label="Points">{el.points}</div>
+                                <div className={styles.tableCell} data-label="GD">{el.goalsDiff}</div>
+                            </div>
+                            <div className={`${styles.mobileColumn} ${styles.logoColumn}`}>
+                                <img src={el.team.logo} alt={el.team.name} className={styles.teamLogo} />
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

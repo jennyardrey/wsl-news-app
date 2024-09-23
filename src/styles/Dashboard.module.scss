@@ -2,11 +2,11 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    // padding: 20px;
 }
 
 .navbar {
-    background-color: #3498db;
+    background-color: #2f1749;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
@@ -41,7 +41,7 @@
     }
 
     &.active button {
-        background-color: #2980b9;
+        background-color: #ba2764;
     }
 }
 
