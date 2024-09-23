@@ -12,6 +12,7 @@ type ActionType =
   | { type: 'SET_VIDEOS'; payload: any }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_DATA'; payload: any }
   | { type: 'CATEGORISE_VIDEOS'; payload: any };
 
 // Define the initial state and its type
@@ -59,8 +60,8 @@ const appReducer = (state: State, action: ActionType): State => {
       return { ...state, tabIndex: action.payload };
     case 'SET_FIXTURES_DATA':
       return { ...state, fixtures: action.payload };
-      case 'SET_STANDINGS_DATA':
-        return { ...state, standings: action.payload };
+    case 'SET_STANDINGS_DATA':
+      return { ...state, standings: action.payload };
     case 'SET_LOADING':
       return { ...state, loading: action.payload };
     case 'SET_ERROR':
@@ -70,10 +71,12 @@ const appReducer = (state: State, action: ActionType): State => {
     case 'SET_VIDEOS':
       return { ...state, videos: action.payload };
     case 'CATEGORISE_VIDEOS':
+      console.log('videos:', action.payload)
       const fullMatch = action.payload.filter(video => video.title.includes('Full Match'));
-      const highlights = action.payload.filter(video => video.title.includes('Highlights'));
-      const others = action.payload.filter(video => !video.title.includes('Full Match') && !video.title.includes('Highlights'));
-      return { ...state, categorisedVideos: { fullMatch, highlights, others } };
+      const highlights = action.payload.filter(video => !video.title.includes('Full Match'));
+
+      console.log('matches: ',fullMatch, highlights)
+      return { ...state, categorisedVideos: { fullMatch, highlights } };
     default:
       return state;
   }
@@ -87,23 +90,25 @@ interface AppStateProviderProps {
 // Explicitly define the AppStateProvider as a React Functional Component
 export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
-  const isDataFetched = useRef(false); // Reference to indicate if data has been fetched
+  const isDataFetched = useRef(false);
 
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'SET_LOADING', payload: true });
       try {
         let storedData = sessionStorage.getItem('apiData');
-        console.log('storedData', Boolean(storedData), 'isDataFetched', isDataFetched.current);
         
         if (storedData) {
-          // If data exists in local storage
+          // If data exists in session storage, parse and update the state
           const parsedData = JSON.parse(storedData);
-          console.log(parsedData);
-          dispatch({ type: 'SET_DATA', payload: parsedData });
+          console.log('Data from sessionStorage:', parsedData);
+          dispatch({ type: 'SET_STANDINGS_DATA', payload: parsedData.combinedData.standings });
+          if (parsedData.combinedData.fixtures) {
+            dispatch({ type: 'SET_FIXTURES_DATA', payload: parsedData.combinedData.fixtures });
+          }
         } else {
           // Otherwise, fetch data from the API
-          console.log('Deffo fetching');
+          console.log('Fetching data from API');
           const todaysDate = new Date();
           const sevenDaysAgo = new Date();
           sevenDaysAgo.setDate(todaysDate.getDate() - 7);
@@ -121,7 +126,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
           });
           console.log('API Response1:', responseStandings); // Log API response
           dispatch({ type: 'SET_STANDINGS_DATA', payload: {...responseStandings.data, }})
-          const responseFixtures = await axios.request({
+          /* const responseFixtures = await axios.request({
             method: 'GET', 
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
             params: { season: '2024', league: '44', from: `${formattedToday}`, to:`${formattedSevenDaysAgo}` },
@@ -129,15 +134,14 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
               'X-RapidAPI-Key': '39b82871damsh553380b45309c17p14d219jsn01f1cf3822d6',
               'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
             },
-          })
-          console.log('API Response2:', responseFixtures); // Log API response
+          }) */
           const combinedData = {
             standings: responseStandings.data,
-            fixtures: responseFixtures.data
+            // fixtures: responseFixtures.data
+            fixtures: null
           }
-          dispatch({ type: 'SET_FIXTURES_DATA', payload: {...responseFixtures.data} });
+          // dispatch({ type: 'SET_FIXTURES_DATA', payload: {...responseFixtures.data} });
           sessionStorage.setItem('apiData', JSON.stringify({combinedData})); // Store data in local storage
-
         }
 
         isDataFetched.current = true;
@@ -157,9 +161,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
       }
     };
 
-    if (!isDataFetched.current) {
-      fetchData();
-    }
+    fetchData();
   }, []);
 
   return (

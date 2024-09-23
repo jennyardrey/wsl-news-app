@@ -1,28 +1,51 @@
 .tabs {
     display: flex;
-    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
-  }
-  
-  .tabs button {
-    background-color: #D3D3D3; // Goal Post Gray
-    border: 1px solid #388E3C; // Dark Pitch Green
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .tabs button:hover {
-    background-color: #81C784; // Light Pitch Green
-    color: #388E3C; // Dark Pitch Green
-  }
-  
-  .tabs .activeTab {
-    background-color: #4CAF50; // Pitch Green
-    color: #FFFFFF; // White
-    border-bottom: 2px solid #388E3C; // Dark Pitch Green
-  }
+    background-color: #ba2764;
+    border-radius: 25px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
 
-  .videoContainer {
+.tabs button {
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    color: #333;
+    position: relative;
+    z-index: 2;
+}
+
+/* .tabs button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.tabs .activeTab {
+    color: white;
+    // background-color: #3b2d4a;
+}
+
+.slider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background-color: #3b2d4a;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    color: white
+}
+
+.videoContainer {
     width: 90%;
     margin: 0 auto;
     max-width: 1200px;
@@ -35,50 +58,144 @@ h2 {
     color: #333;
 }
 
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-button {
-    margin: 0 10px;
-    
-    font-size: 1em;
-    border: none;
-    cursor: pointer;
-    background-color: #ddd;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #bbb;
-}
-
-.activeTab {
-    background-color: #333;
-    color: white;
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
 }
 
 .videoWrapper {
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.videoTitle {
+    padding: 12px 15px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #333;
+    background-color: #ffffff;
+    min-height: 60px; // Adjust this value to show more or less of the title
+    display: -webkit-box;
+    -webkit-line-clamp: 3; // Show up to 3 lines of text
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.videoFrame {
+    position: relative;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    height: 0;
+    overflow: hidden;
 }
 
 .videoIframe {
-    display: block;
-    width: calc(100% - 20px); /* Ensure the iframe fits within the padding */
-    height: 315px;
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
 }
 
-@media screen and (min-width: 768px) {
-  button {
+.loadMoreButton {
+    display: block;
+    margin: 20px auto;
     padding: 10px 20px;
-  }
+    font-size: 1em;
+    background-color: #3b2d4a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loadMoreButton:hover {
+    background-color: #ba2764;
+}
+
+@media screen and (min-width: 576px) {
+    .videoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .videoGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .videoGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .videoGrid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.videoCard {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.thumbnailContainer {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; // 16:9 aspect ratio
+    overflow: hidden;
+}
+
+.thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.videoTitle {
+    margin-top: 8px;
+    font-weight: bold;
 }
