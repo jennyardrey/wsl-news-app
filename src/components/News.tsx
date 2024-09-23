@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppState } from "../AppState";
+import { useAppState } from "../AppState.tsx";
 import styles from  '../styles/News.module.scss';
 
 function News() {
