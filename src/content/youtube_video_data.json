@@ -1,8 +1,33 @@
 [
     {
+        "title": "LIVE: Everton v West Ham United | Barclays WSL 2024-25",
+        "url": "https://www.youtube.com/watch?v=6y2Ht2Le2Yg",
+        "videoId": "https://www.youtube.com/embed/6y2Ht2Le2Yg"
+    },
+    {
+        "title": "LIVE: Crystal Palace v Brighton & Hove Albion | Barclays WSL 2024-25",
+        "url": "https://www.youtube.com/watch?v=AYcWv9b07Wc",
+        "videoId": "https://www.youtube.com/embed/AYcWv9b07Wc"
+    },
+    {
+        "title": "LIVE: Aston Villa v Leicester City | Barclays WSL 2024-25",
+        "url": "https://www.youtube.com/watch?v=4aEOIscLIcw",
+        "videoId": "https://www.youtube.com/embed/4aEOIscLIcw"
+    },
+    {
+        "title": "LIVE: Arsenal v Chelsea | Barclays WSL 2024-25",
+        "url": "https://www.youtube.com/watch?v=hJubIdcOc9o",
+        "videoId": "https://www.youtube.com/embed/hJubIdcOc9o"
+    },
+    {
         "title": "Full Match: Leicester City v Crystal Palace | Barclays WSL 2024-25",
         "url": "https://www.youtube.com/watch?v=y2mCVDXz70E",
         "videoId": "https://www.youtube.com/embed/y2mCVDXz70E"
+    },
+    {
+        "title": "Full Match: Tottenham Hotspur v Liverpool | Barclays WSL 2024-25",
+        "url": "https://www.youtube.com/watch?v=ddZEEcHaaIU",
+        "videoId": "https://www.youtube.com/embed/ddZEEcHaaIU"
     },
     {
         "title": "Full Match: Arsenal v Everton | Barclays WSL 2024-25",
@@ -75,27 +100,32 @@
         "videoId": "https://www.youtube.com/embed/qOmbPRU5AGM"
     },
     {
-        "title": "Palace seal first WSL win | Leicester City v Crystal Palace Highlights | Barclays WSL 2024-25",
+        "title": "Man City Unbeaten, Six-Goal Thriller, Palace Get First Win & More | Gameweek 3 Recap | BWSL 24/25",
+        "url": "https://www.youtube.com/watch?v=VhvRnyMWbSc",
+        "videoId": "https://www.youtube.com/embed/VhvRnyMWbSc"
+    },
+    {
+        "title": "Palace Seal First WSL Win! | Leicester City v Crystal Palace Highlights | Barclays WSL 2024-25",
         "url": "https://www.youtube.com/watch?v=yR_9qTZiwag",
         "videoId": "https://www.youtube.com/embed/yR_9qTZiwag"
     },
     {
-        "title": "Late drama in five goal thriller | Tottenham Hotspur v Liverpool Highlights | Barclays WSL 2024-25",
+        "title": "Late Drama in Five Goal Thriller | Tottenham Hotspur v Liverpool Highlights | Barclays Wsl 2024-25",
         "url": "https://www.youtube.com/watch?v=V3V3ZUchIfI",
         "videoId": "https://www.youtube.com/embed/V3V3ZUchIfI"
     },
     {
-        "title": "Everton grab first point of the season | Arsenal v Everton Highlights | Barclays WSL 2024-25",
+        "title": "Everton Grab First Point of The Season | Arsenal v Everton Highlights | Barclays WSL 2024-25",
         "url": "https://www.youtube.com/watch?v=sJZhYMrO76c",
         "videoId": "https://www.youtube.com/embed/sJZhYMrO76c"
     },
     {
-        "title": "Hemp and Fowler on target | Manchester City v West Ham United Highlights | Barclays WSL 2024-25",
+        "title": "Hemp and Fowler on Target | Manchester City v West Ham United Highlights | Barclays WSL 2024-25",
         "url": "https://www.youtube.com/watch?v=emaO3EdTNGI",
         "videoId": "https://www.youtube.com/embed/emaO3EdTNGI"
     },
     {
-        "title": "Two sent off and six goals | Brighton & Hove Albion v Aston Villa Highlights | Barclays WSL 2024-25",
+        "title": "Two Sent Off and Six Goals! \ud83d\udca5 | Brighton & Hove Albion v Aston Villa Highlights | BWSL 2024-25",
         "url": "https://www.youtube.com/watch?v=VyN0bqYuR4g",
         "videoId": "https://www.youtube.com/embed/VyN0bqYuR4g"
     },
@@ -110,7 +140,7 @@
         "videoId": "https://www.youtube.com/embed/rnl5LTk37TE"
     },
     {
-        "title": "Lionesses late winner | Southampton v London City Lionesses Highlights | Women's League Cup 24/25",
+        "title": "Lionesses Late Winner! | Southampton v London City Lionesses Highlights | Women's League Cup 24/25",
         "url": "https://www.youtube.com/watch?v=PzV4g81C1YU",
         "videoId": "https://www.youtube.com/embed/PzV4g81C1YU"
     },
